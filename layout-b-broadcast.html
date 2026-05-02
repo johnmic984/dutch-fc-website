@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dutch FC — Layout B · The Broadcast</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--orange:#FF6600;--ink:#0A0A0A;--surface:#0F0F10;--line:rgba(255,255,255,.08);--mono:'JetBrains Mono',monospace;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;background:var(--ink);color:#fff;line-height:1.5;overflow-x:hidden;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+
+  /* HEADER — broadcast network style: live bar + main */
+  .live-bar{
+    background:#000;color:#fff;padding:8px 24px;font-family:var(--mono);font-size:11px;
+    display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);
+    letter-spacing:.5px;
+  }
+  .live-bar .left{display:flex;align-items:center;gap:18px;}
+  .live{display:inline-flex;align-items:center;gap:8px;color:var(--orange);font-weight:600;}
+  .live::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 0 rgba(255,102,0,.6);animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,102,0,.5);}70%{box-shadow:0 0 0 12px rgba(255,102,0,0);}100%{box-shadow:0 0 0 0 rgba(255,102,0,0);}}
+  .live-bar .clock{color:#888;}
+  .live-bar .right{color:#888;}
+
+  nav.main{
+    background:#0a0a0a;border-bottom:2px solid var(--orange);padding:16px 32px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    position:sticky;top:0;z-index:50;
+  }
+  .brand{display:flex;align-items:center;gap:14px;}
+  .brand .crest{position:relative;width:62px;height:62px;border-radius:8px;background:#000;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);box-shadow:0 0 0 1px rgba(255,102,0,.25), 0 8px 22px rgba(255,102,0,.18);overflow:hidden;}
+  .brand .crest::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--orange);}
+  .brand .crest img{width:78%;height:78%;object-fit:contain;}
+  .brand .name{font-family:'Bebas Neue';font-size:28px;letter-spacing:2.5px;line-height:1;}
+  .brand .sub{font-family:var(--mono);font-size:9.5px;color:var(--orange);letter-spacing:2px;margin-top:5px;}
+  .links{display:flex;gap:4px;}
+  .links a{padding:10px 16px;font-size:12px;text-transform:uppercase;letter-spacing:1.6px;font-weight:600;color:#bbb;border-radius:4px;transition:.2s;}
+  .links a:hover, .links a.active{background:rgba(255,102,0,.12);color:var(--orange);}
+  .cta-watch{background:var(--orange);color:#000;font-family:'Bebas Neue';letter-spacing:2px;font-size:14px;padding:10px 20px;border-radius:4px;display:inline-flex;align-items:center;gap:8px;}
+  .cta-watch::before{content:"●";color:#000;}
+
+  /* HERO — asymmetric broadcast grid */
+  .hero{
+    display:grid;grid-template-columns:1.6fr 1fr;grid-template-rows:1fr auto;gap:1px;
+    background:var(--line);min-height:84vh;
+  }
+  .hero > div{background:var(--ink);padding:40px;position:relative;overflow:hidden;}
+  .hero .featured{grid-row:1 / span 2;background:#0a0a0a;display:flex;flex-direction:column;justify-content:flex-end;padding:0;}
+  .hero .featured .img{position:absolute;inset:0;background:url('../media/The1stteam-42476a7a-1920w.png') center/cover;}
+  .hero .featured .img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.3) 0%, rgba(0,0,0,.2) 50%, rgba(0,0,0,.95) 100%);}
+  .hero .featured .meta{position:relative;padding:48px;z-index:2;}
+  .hero .featured .tag{display:inline-flex;align-items:center;gap:8px;background:var(--orange);color:#000;padding:6px 12px;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:2px;border-radius:3px;}
+  .hero .featured h1{font-family:'Bebas Neue';font-size:clamp(56px,7vw,108px);line-height:.95;letter-spacing:1px;margin:18px 0 16px;max-width:780px;}
+  .hero .featured h1 .o{color:var(--orange);}
+  .hero .featured p{color:#bbb;font-size:16px;max-width:560px;margin-bottom:24px;}
+  .hero .featured .actions{display:flex;gap:10px;}
+  .btn{font-family:'Bebas Neue';letter-spacing:2px;font-size:14px;padding:14px 22px;border-radius:4px;display:inline-flex;align-items:center;gap:8px;}
+  .btn-primary{background:var(--orange);color:#000;}
+  .btn-primary:hover{background:#fff;}
+  .btn-line{border:1px solid rgba(255,255,255,.25);color:#fff;}
+  .btn-line:hover{border-color:var(--orange);color:var(--orange);}
+
+  /* Right top — next match scoreboard */
+  .scoreboard h3{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--orange);text-transform:uppercase;margin-bottom:16px;}
+  .match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .match .team{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .match .crest{width:46px;height:46px;border-radius:8px;background:#222;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';color:#fff;font-size:18px;}
+  .match .crest.dfc{background:#000;border:1px solid var(--orange);color:var(--orange);}
+  .match .team .n{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#bbb;}
+  .match .vs{font-family:'Bebas Neue';font-size:30px;color:var(--orange);}
+  .match-meta{display:flex;justify-content:space-between;margin-top:14px;font-family:var(--mono);font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;}
+  .countdown{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .countdown .seg{background:#000;border:1px solid var(--line);padding:10px 4px;border-radius:4px;text-align:center;}
+  .countdown .seg .n{font-family:'Bebas Neue';font-size:28px;color:#fff;line-height:1;}
+  .countdown .seg .l{font-family:var(--mono);font-size:9px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-top:4px;}
+
+  /* Right bottom — quick stats panel */
+  .quickstats h3{font-family:var(--mono);font-size:11px;letter-spacing:3px;color:var(--orange);text-transform:uppercase;margin-bottom:16px;}
+  .qrow{display:grid;grid-template-columns:1fr auto;padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline;}
+  .qrow:last-child{border-bottom:none;}
+  .qrow .l{font-size:12px;color:#bbb;text-transform:uppercase;letter-spacing:1.5px;}
+  .qrow .v{font-family:'Bebas Neue';font-size:30px;color:#fff;}
+  .qrow .v.o{color:var(--orange);}
+
+  /* TICKER */
+  .ticker{background:var(--orange);color:#000;height:38px;display:flex;align-items:center;overflow:hidden;}
+  .ticker-track{display:flex;white-space:nowrap;animation:slide 28s linear infinite;}
+  .ticker-track span{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:1.5px;padding-right:48px;}
+  .ticker-track .sep{color:#000;opacity:.4;}
+  @keyframes slide{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+  /* RESULTS / FIXTURES grid */
+  .grid-row{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .grid-row > div{background:var(--surface);padding:32px;}
+
+  .col-fixtures{grid-column:span 7;}
+  .col-leaders{grid-column:span 5;}
+  .panel-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;}
+  .panel-head h3{font-family:'Bebas Neue';font-size:28px;letter-spacing:2px;}
+  .panel-head a{font-family:var(--mono);font-size:11px;color:var(--orange);letter-spacing:2px;text-transform:uppercase;}
+  .fix{display:grid;grid-template-columns:80px 1fr 60px 1fr 80px;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);}
+  .fix:last-child{border-bottom:none;}
+  .fix .date{font-family:var(--mono);font-size:11px;color:#888;letter-spacing:1.5px;}
+  .fix .ta{text-align:right;font-weight:600;font-size:13px;}
+  .fix .tb{text-align:left;font-weight:600;font-size:13px;}
+  .fix .score{text-align:center;font-family:'Bebas Neue';font-size:20px;color:var(--orange);background:#000;padding:6px 0;border-radius:4px;}
+  .fix .venue{font-family:var(--mono);font-size:10px;color:#888;text-align:right;letter-spacing:1.5px;text-transform:uppercase;}
+  .leader{display:grid;grid-template-columns:32px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);}
+  .leader:last-child{border-bottom:none;}
+  .leader .rank{font-family:'Bebas Neue';font-size:22px;color:var(--orange);}
+  .leader .name{font-size:13px;font-weight:600;}
+  .leader .role{font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px;}
+  .leader .stat{font-family:'Bebas Neue';font-size:24px;}
+
+  /* PROGRAMS — broadcast tiles */
+  .programs{padding:80px 32px;background:#070708;}
+  .ph{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;border-bottom:1px solid var(--line);padding-bottom:18px;}
+  .ph h2{font-family:'Bebas Neue';font-size:64px;letter-spacing:2px;}
+  .ph .label{font-family:var(--mono);font-size:11px;color:var(--orange);letter-spacing:2px;}
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);}
+  .ptile{
+    background:var(--surface);padding:28px;display:flex;flex-direction:column;justify-content:space-between;
+    min-height:240px;position:relative;overflow:hidden;transition:background .25s;
+  }
+  .ptile:hover{background:#16100a;}
+  .ptile .num{font-family:var(--mono);font-size:11px;color:var(--orange);letter-spacing:2px;}
+  .ptile h4{font-family:'Bebas Neue';font-size:34px;letter-spacing:1.5px;margin-top:8px;}
+  .ptile p{font-size:13px;color:#999;line-height:1.6;}
+  .ptile .arrow{font-family:'Bebas Neue';color:var(--orange);font-size:14px;letter-spacing:2px;margin-top:12px;}
+
+  footer{padding:50px 32px;text-align:center;color:#666;font-family:var(--mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;border-top:1px solid var(--line);}
+  footer a{color:var(--orange);}
+
+  @media (max-width:1000px){
+    .hero{grid-template-columns:1fr;}
+    .grid-row{grid-template-columns:1fr;}
+    .col-fixtures, .col-leaders{grid-column:span 1;}
+    .pgrid{grid-template-columns:1fr 1fr;}
+    .links{display:none;}
+    .ph h2{font-size:44px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="live-bar">
+  <div class="left">
+    <span class="live">LIVE · TRYOUTS OPEN</span>
+    <span>MAY 11 – JUN 12 · STONECREEK · FRISCO TX</span>
+  </div>
+  <div class="clock" id="clock">--:--:-- CT</div>
+  <div class="right">UPSL · TIER 4 · NATIONAL</div>
+</div>
+
+<nav class="main" aria-label="Primary">
+  <a class="brand" href="#">
+    <span class="crest"><img src="../media/DutchFCLogoNoMatte1-LOGO.gif" alt="Dutch FC"/></span>
+    <div><div class="name">Dutch FC</div><div class="sub">EST · 2018 · NORTH DALLAS</div></div>
+  </a>
+  <div class="links">
+    <a class="active" href="#">Home</a><a href="#">Teams</a><a href="#">Fixtures</a>
+    <a href="#">Programs</a><a href="#">Camps</a><a href="#">News</a><a href="#">Tryouts</a>
+  </div>
+  <a class="cta-watch" href="#">WATCH LIVE</a>
+</nav>
+
+<section class="hero">
+  <div class="featured">
+    <div class="img" aria-hidden="true"></div>
+    <div class="meta">
+      <span class="tag">● 1ST TEAM · UPSL</span>
+      <h1>Compete <span class="o">at the highest</span> level.</h1>
+      <p>The Dutch FC 1st Team plays in the United Premier Soccer League — the 4th tier of US Soccer. 400+ clubs nationwide. 32 National Playoff spots. We've been there.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#">Join a Tryout →</a>
+        <a class="btn btn-line" href="#">Match Reports</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scoreboard">
+    <h3>● Next Match</h3>
+    <div class="match">
+      <div class="team"><div class="crest dfc">DFC</div><div class="n">Dutch FC</div></div>
+      <div class="vs">VS</div>
+      <div class="team"><div class="crest">FW</div><div class="n">FC Wichita</div></div>
+    </div>
+    <div class="match-meta">
+      <span>Sat · Jun 14 · 19:30 CT</span>
+      <span>Stonecreek · Home</span>
+    </div>
+    <div class="countdown" id="countdown">
+      <div class="seg"><div class="n">42</div><div class="l">Days</div></div>
+      <div class="seg"><div class="n">06</div><div class="l">Hrs</div></div>
+      <div class="seg"><div class="n">12</div><div class="l">Min</div></div>
+      <div class="seg"><div class="n">38</div><div class="l">Sec</div></div>
+    </div>
+  </div>
+
+  <div class="quickstats">
+    <h3>● Club At A Glance</h3>
+    <div class="qrow"><span class="l">Select Teams</span><span class="v o">24</span></div>
+    <div class="qrow"><span class="l">Academy Teams</span><span class="v">13</span></div>
+    <div class="qrow"><span class="l">Active Players</span><span class="v">540+</span></div>
+    <div class="qrow"><span class="l">Year Founded</span><span class="v o">2018</span></div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>TRYOUTS OPEN MAY 11 – JUN 12</span><span class="sep">●</span>
+    <span>1ST TEAM 3-1 W vs FC ARLINGTON</span><span class="sep">●</span>
+    <span>TIPS ACADEMY · FRIDAY 5:30 PM</span><span class="sep">●</span>
+    <span>U14 BOYS WIN CHALLENGE CUP</span><span class="sep">●</span>
+    <span>SUMMER CAMP REGISTRATION LIVE</span><span class="sep">●</span>
+    <span>TRYOUTS OPEN MAY 11 – JUN 12</span><span class="sep">●</span>
+    <span>1ST TEAM 3-1 W vs FC ARLINGTON</span><span class="sep">●</span>
+    <span>TIPS ACADEMY · FRIDAY 5:30 PM</span><span class="sep">●</span>
+    <span>U14 BOYS WIN CHALLENGE CUP</span><span class="sep">●</span>
+    <span>SUMMER CAMP REGISTRATION LIVE</span><span class="sep">●</span>
+  </div>
+</div>
+
+<div class="grid-row">
+  <div class="col-fixtures">
+    <div class="panel-head"><h3>Recent Results & Fixtures</h3><a href="#">View All →</a></div>
+    <div class="fix"><span class="date">04.27</span><span class="ta">Dutch FC 1st</span><span class="score">3 – 1</span><span class="tb">FC Arlington</span><span class="venue">Home · W</span></div>
+    <div class="fix"><span class="date">04.20</span><span class="ta">Dallas City</span><span class="score">0 – 2</span><span class="tb">Dutch FC 1st</span><span class="venue">Away · W</span></div>
+    <div class="fix"><span class="date">04.13</span><span class="ta">Dutch FC U14</span><span class="score">4 – 0</span><span class="tb">FC Plano</span><span class="venue">Home · W</span></div>
+    <div class="fix"><span class="date">06.14</span><span class="ta">Dutch FC 1st</span><span class="score">— : —</span><span class="tb">FC Wichita</span><span class="venue">Home · 19:30</span></div>
+    <div class="fix"><span class="date">06.21</span><span class="ta">Tulsa Athletic</span><span class="score">— : —</span><span class="tb">Dutch FC 1st</span><span class="venue">Away · 18:00</span></div>
+  </div>
+  <div class="col-leaders">
+    <div class="panel-head"><h3>Top Scorers</h3><a href="#">Stats →</a></div>
+    <div class="leader"><span class="rank">01</span><div><div class="name">Tyler M.</div><div class="role">Forward · 1st Team</div></div><span class="stat">14</span></div>
+    <div class="leader"><span class="rank">02</span><div><div class="name">Mateo R.</div><div class="role">Midfielder · 1st Team</div></div><span class="stat">9</span></div>
+    <div class="leader"><span class="rank">03</span><div><div class="name">James K.</div><div class="role">Forward · U18</div></div><span class="stat">7</span></div>
+    <div class="leader"><span class="rank">04</span><div><div class="name">Aiden P.</div><div class="role">Winger · U16</div></div><span class="stat">6</span></div>
+  </div>
+</div>
+
+<section class="programs">
+  <div class="ph">
+    <div><div class="label">SECTION 03 · PROGRAMS</div><h2>The Pathway.</h2></div>
+    <a href="#" class="btn btn-line">All Programs →</a>
+  </div>
+  <div class="pgrid">
+    <a class="ptile" href="#"><div><span class="num">01</span><h4>Club Teams</h4><p>24 select & 13 academy teams across North Dallas.</p></div><span class="arrow">More →</span></a>
+    <a class="ptile" href="#"><div><span class="num">02</span><h4>Camps</h4><p>Spring & summer camps for U6 – U17, all levels.</p></div><span class="arrow">More →</span></a>
+    <a class="ptile" href="#"><div><span class="num">03</span><h4>TIPS Academy</h4><p>Friday skills training in the Dutch curriculum.</p></div><span class="arrow">More →</span></a>
+    <a class="ptile" href="#"><div><span class="num">04</span><h4>Goalkeeping</h4><p>Specialist coaching with Trey Nickel.</p></div><span class="arrow">More →</span></a>
+    <a class="ptile" href="#"><div><span class="num">05</span><h4>1st Team UPSL</h4><p>4th tier US Soccer · adult 18+ competition.</p></div><span class="arrow">More →</span></a>
+    <a class="ptile" href="#"><div><span class="num">06</span><h4>Game Plan for Life</h4><p>FCA, fundraising, community service.</p></div><span class="arrow">More →</span></a>
+    <a class="ptile" href="#"><div><span class="num">07</span><h4>Player Pathway</h4><p>Academy → Select → 1st Team progression.</p></div><span class="arrow">More →</span></a>
+    <a class="ptile" href="#"><div><span class="num">08</span><h4>College Prep</h4><p>Showcase & recruitment support for U16+.</p></div><span class="arrow">More →</span></a>
+  </div>
+</section>
+
+<footer>
+  Layout B · The Broadcast &nbsp; · &nbsp; <a href="index.html">← Pick another</a>
+</footer>
+
+<script>
+  function tick(){
+    const d=new Date(); const t=d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZone:'America/Chicago'});
+    document.getElementById('clock').textContent=t+' CT';
+  } tick(); setInterval(tick,1000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dutch FC — Design Layout Options</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;background:#0A0A0A;color:#fff;min-height:100vh;padding:80px 32px;}
+  .wrap{max-width:1200px;margin:0 auto;}
+  .eyebrow{font-size:11px;color:#FF6600;letter-spacing:4px;text-transform:uppercase;font-weight:600;}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:72px;letter-spacing:1px;line-height:1;margin:14px 0 18px;}
+  .lede{font-size:17px;color:#A0A0A0;max-width:680px;line-height:1.7;margin-bottom:60px;}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+  .card{
+    background:#141414;border:1px solid rgba(255,255,255,0.07);border-radius:14px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .35s, border-color .35s, box-shadow .35s;
+    text-decoration:none;color:inherit;
+  }
+  .card:hover{transform:translateY(-6px);border-color:#FF6600;box-shadow:0 24px 60px rgba(255,102,0,.18);}
+  .thumb{height:240px;position:relative;overflow:hidden;}
+  .thumb::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%, rgba(0,0,0,.6));}
+  .body{padding:28px 28px 32px;}
+  .label{font-family:'Bebas Neue',sans-serif;font-size:14px;color:#FF6600;letter-spacing:3px;}
+  .body h3{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:1px;margin:6px 0 14px;}
+  .body p{font-size:14px;color:#A0A0A0;line-height:1.7;margin-bottom:18px;}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;}
+  .tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#fff;background:rgba(255,255,255,0.06);padding:5px 10px;border-radius:999px;}
+  .arrow{display:inline-flex;align-items:center;gap:8px;color:#FF6600;font-weight:600;font-size:13px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;}
+  .home-link{display:inline-block;margin-top:48px;color:#A0A0A0;font-size:13px;letter-spacing:2px;text-transform:uppercase;}
+  .home-link:hover{color:#FF6600;}
+
+  /* thumbnails (pure CSS so no extra assets needed) */
+  .thumb-a{background:
+      linear-gradient(180deg,#0A0A0A 0%, rgba(0,0,0,.4) 60%, #0A0A0A 100%),
+      url('../media/General-6-1920w.jpg') center/cover;}
+  .thumb-b{background:
+      linear-gradient(135deg, rgba(255,102,0,.25), transparent 60%),
+      url('../media/The1stteam-42476a7a-1920w.png') center/cover #050505;}
+  .thumb-c{background:url('../media/DutchFCMensBanner-1920w.jpeg') center/cover;}
+  .thumb-c::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 60%, rgba(255,102,0,.45), transparent 55%), rgba(0,0,0,.35);}
+  .thumb-d{background:#fff;display:flex;align-items:center;justify-content:center;}
+  .thumb-d::before{content:"";width:60%;height:60%;background:url('../media/DutchFCLogoNoMatte1-LOGO.gif') center/contain no-repeat;filter:drop-shadow(0 10px 30px rgba(255,102,0,.3));}
+
+  @media (max-width:780px){
+    h1{font-size:52px;}
+    .grid{grid-template-columns:1fr;}
+    body{padding:48px 20px;}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="eyebrow">Dutch FC · Design Exploration</div>
+    <h1>Pick a Direction.</h1>
+    <p class="lede">Four distinct on-page layout options for the Dutch FC homepage. Each one keeps the brand DNA — black, vivid orange, Bebas Neue / Inter, the GIF logo — but explores a different storytelling rhythm. Open any layout, scroll through, and let me know which direction to fully build out.</p>
+
+    <div class="grid">
+      <a class="card" href="layout-a-editorial.html">
+        <div class="thumb thumb-a"></div>
+        <div class="body">
+          <span class="label">Layout A</span>
+          <h3>The Editorial</h3>
+          <p>Players' Tribune meets premium magazine. Large serif-feel display copy, oversized imagery, story-driven sections, generous gutters. Quiet confidence — the brand speaks like a publication.</p>
+          <div class="meta">
+            <span class="tag">Magazine</span><span class="tag">Center-aligned</span><span class="tag">Story-led</span>
+          </div>
+          <div class="arrow">View Layout →</div>
+        </div>
+      </a>
+
+      <a class="card" href="layout-b-broadcast.html">
+        <div class="thumb thumb-b"></div>
+        <div class="body">
+          <span class="label">Layout B</span>
+          <h3>The Broadcast</h3>
+          <p>ESPN / live-TV energy. Asymmetric data grid, ticker-driven hero, scoreboard-style stats, schedule blocks, and a results strip. Reads like a sports network — built for stats and drama.</p>
+          <div class="meta">
+            <span class="tag">Asymmetric</span><span class="tag">Data-driven</span><span class="tag">High density</span>
+          </div>
+          <div class="arrow">View Layout →</div>
+        </div>
+      </a>
+
+      <a class="card" href="layout-c-cinematic.html">
+        <div class="thumb thumb-c"></div>
+        <div class="body">
+          <span class="label">Layout C</span>
+          <h3>The Cinematic</h3>
+          <p>Full-bleed video hero, scroll-locked chapters, oversized imagery and one bold statement at a time. Closest to FC Barcelona / Nike brand films — immersive, slow, premium.</p>
+          <div class="meta">
+            <span class="tag">Fullscreen</span><span class="tag">Video-first</span><span class="tag">Immersive</span>
+          </div>
+          <div class="arrow">View Layout →</div>
+        </div>
+      </a>
+
+      <a class="card" href="layout-d-minimalist.html">
+        <div class="thumb thumb-d"></div>
+        <div class="body">
+          <span class="label">Layout D</span>
+          <h3>The Minimalist</h3>
+          <p>Apple product-page restraint. White-first with deep black accents, alternating image/text product blocks for each program, surgical use of orange. Calm, premium, modern.</p>
+          <div class="meta">
+            <span class="tag">White-first</span><span class="tag">Product blocks</span><span class="tag">Apple-style</span>
+          </div>
+          <div class="arrow">View Layout →</div>
+        </div>
+      </a>
+    </div>
+
+    <a class="home-link" href="../index.html">← Back to current site</a>
+  </div>
+</body>
+</html>
